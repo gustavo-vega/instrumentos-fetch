@@ -1,0 +1,172 @@
+* {
+  margin: 0px;
+  padding: 0px; }
+
+h1 {
+  color: #118331;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-style: oblique; }
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 15px;
+  background: #020024;
+  background: radial-gradient(circle, #020024 0%, rgba(12, 74, 26, 0.410802) 38%, #0c3b13 71%, #0c2332 100%); }
+
+.margen-s {
+  margin: 20px; }
+
+.margen-m {
+  margin: 40px; }
+
+.img {
+  height: 400px;
+  width: 60%;
+  margin: 30px 270px;
+  border-bottom-left-radius: 50px;
+  border-top-right-radius: 50px;
+  box-shadow: 0 10px 20px 10px green;
+  transition: transform 0.5s; }
+
+.img:hover {
+  transform: rotate(5deg); }
+
+.texto {
+  text-align: center;
+  font-family: cursive; }
+
+#container {
+  display: grid;
+  grid-template-areas: "insta instb instc instd"
+ "inste instf instg insth"; }
+
+/*grid area index*/
+.insta {
+  grid-area: insta;
+  align-items: center; }
+
+.instb {
+  grid-area: instb;
+  align-items: center; }
+
+.instc {
+  grid-area: instc;
+  align-items: center; }
+
+.instd {
+  grid-area: instd;
+  align-items: center; }
+
+.inste {
+  grid-area: inste;
+  align-items: center; }
+
+.instf {
+  grid-area: instf;
+  align-items: center; }
+
+.instg {
+  grid-area: instg;
+  align-items: center; }
+
+.insth {
+  grid-area: insth;
+  align-items: center; }
+
+.card {
+  border-radius: 20px;
+  margin: 10px;
+  text-align: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 2px 2px 4px #15151f;
+  overflow: hidden;
+  transition: all 0.5s;
+  font-size: 20px;
+  align-items: center; }
+
+.card a {
+  font-weight: 40px;
+  text-decoration: none;
+  color: white;
+  background-color: green;
+  border-radius: 25px;
+  padding: 10px 30px;
+  display: block;
+  margin: 15px; }
+
+.card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 2px 2px #393241; }
+
+  .btnAgregar {
+    font-weight: 40px;
+    text-decoration: none;
+    color: white;
+    background-color: green;
+    border-radius: 25px;
+    padding: 10px 30px;
+    display: block;
+    margin: 15px; 
+  }
+
+.bloque {
+  margin: 40px 80px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); }
+  .bloque__grid {
+    background-image: linear-gradient(to right, grey, white);
+    border: 1px solid #9797af;
+    border-radius: 30px;
+    box-shadow: 1px 2px 3px #393241;
+    text-align: center;
+    padding: 15px;
+    margin: 5px; }
+
+.list-instrumentos {
+  margin-left: 30px;
+  color: #6dc96d;
+  font-style: italic; }
+
+.list-accesorios {
+  margin-left: 40px;
+  color: #a6d4a6;
+  font-style: italic; }
+
+.link-contactos {
+  font-style: italic;
+  background-color: #11553b;
+  text-align: center; }
+
+.link-productos {
+  font-style: italic;
+  background-color: #11553b;
+  text-align: center; }
+
+  #cardCounter {
+    font-size: 26px;
+    color:black;
+  }
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column; }
+  .bloque {
+    grid-template-columns: 1fr; }
+  .container {
+    display: grid;
+    grid-template-areas: "insta instb"
+ "instc instd"
+ "inste instf"
+ "instg insth"; }
+  .img {
+    height: 300px;
+    width: 100%; } }
+
+@media (max-width: 480px) {
+  .container {
+    display: grid;
+    grid-template-areas: "insta instb"
+ "instc instd"
+ "inste instf"
+ "instg insth"; } }
