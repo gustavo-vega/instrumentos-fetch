@@ -1,11 +1,21 @@
 const productos = []
 const carrito = []
 
+
+const contenedorProductos = document.getElementById('contenedor-productos')
+const contenedorCarrito = document.getElementById('carrito-contenedor')
+const botonVaciar = document.getElementById('vaciar-carrito')
+const contadorCarrito = document.getElementById('contadorCarrito')
+// const precioTotal = document.getElementById('precioTotal')
+// const cantidad = document.getElementById('cantidad')
+
+
 class Instrumento{
-    constructor(id, nombre, precio, img){
+    constructor(id, nombre, precio, cantidad, img){
         this.id = id
         this.nombre= nombre
         this.precio = precio
+        this.cantidad = cantidad
         this.img = img
     }
 
@@ -30,14 +40,14 @@ class Instrumento{
     }
 }
 
-let bongo = new Instrumento( '001', 'bongo', 21643,'../imagenes/bongod.jpg')
-let guitarra = new Instrumento('002', 'guitarra', 112889, '../imagenes/guitarra.jpg') 
-let saxo = new Instrumento('003', 'saxo', 134152, '../imagenes/Saxo.jpg')
-let bateria = new Instrumento('004', 'bateria', 203488, '../imagenes/bateri.jpg')
-let correas = new Instrumento('005', 'correas',3899 , '../imagenes/correas.jpg')
-let palillos = new Instrumento('006', 'palillos', 2209, '../imagenes/palillos.jpg')
-let parches = new Instrumento('007', 'parches', 5316, '../imagenes/parchesa.jpg')
-let puas = new Instrumento('008', 'puas', 590, '../imagenes/puas.jpg')
+let bongo = new Instrumento( '001', 'bongo', 21643, 1,'../imagenes/bongod.jpg')
+let guitarra = new Instrumento('002', 'guitarra', 112889, 1, '../imagenes/guitarra.jpg') 
+let saxo = new Instrumento('003', 'saxo', 134152, 1, '../imagenes/Saxo.jpg')
+let bateria = new Instrumento('004', 'bateria', 203488, 1, '../imagenes/bateri.jpg')
+let correas = new Instrumento('005', 'correas',3899 , 1, '../imagenes/correas.jpg')
+let palillos = new Instrumento('006', 'palillos', 2209, 1, '../imagenes/palillos.jpg')
+let parches = new Instrumento('007', 'parches', 5316, 1, '../imagenes/parchesa.jpg')
+let puas = new Instrumento('008', 'puas', 590, 1, '../imagenes/puas.jpg')
 
 productos.push(bongo, guitarra, saxo, bateria, correas, palillos, parches, puas)
 
@@ -56,17 +66,48 @@ function agregarCarrito(producto) {
         carrito.push({...producto, cantidad: 1}) //SPREAD
      } else {
         const carritoFiltrado = carrito.filter(prod => prod.id != producto.id)
-   
         carrito = [
             ...carritoFiltrado, //SPREAD
             { ...enCarrito, cantidad: enCarrito.cantidad ++}//SPREAD Y OPERADOR++
         ]
     }
-    contador.innerHTML = carrito.reduce((acc, prod) => acc + prod.cantidad, 0)   
+    carritoActual()
+    // contador.innerHTML = carrito.reduce((acc, prod) => acc + prod.cantidad, 0)   
 }
 
-const contador = document.getElementById('cardCounter')
-contador.innerHTML = carrito.reduce((acc, prod) => acc + prod.cantidad, 0)
+botonVaciar.addEventListener('click', () => {
+    carrito.length = 0
+    carritoActual()
+})
+
+const eliminarDelCarrito = (prodId) => {
+    const item = carrito.find((prod) => prod.id === prodId)
+    const indice = carrito.indexOf(item)
+    carrito.splice(indice, 1)
+    carritoActual() 
+    console.log(carrito)
+}
+
+const carritoActual= () => {
+    contenedorCarrito.innerHTML = "" 
+    carrito.forEach((prod) => {
+        const div = document.createElement('div')
+        div.className = ('productoEnCarrito')
+        div.innerHTML = `
+        <p>${prod.nombre}</p>
+        <p>Precio:$${prod.precio}</p>
+        <p>Cantidad: <span id="cantidad">${prod.cantidad}</span></p>
+        <button onclick="eliminarDelCarrito(${prod.id})" class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
+        `
+        contenedorCarrito.appendChild(div)
+        localStorage.setItem('carrito', JSON.stringify(carrito))
+})
+contadorCarrito.innerText = carrito.length 
+console.log(carrito)
+precioTotal.innerText = carrito.reduce((acc, prod) => acc + prod.cantidad * prod.precio, 0)
+}
+
+// contadorCarrito.innerHTML = carrito.reduce((acc, prod) => acc + prod.cantidad, 0)
 
 const terminarCompra =document.getElementById('terminarCompra')
 
@@ -93,13 +134,14 @@ btnReparacion.onclick = () => {
     .then(response=> response.json())
     .then(info=>{
         const luthiers = info.results
-        luthiers.splice(6)
+        luthiers.splice(8)
         lista.innerHTML = ''
         luthiers.forEach(luthier => {
             const li = document.createElement('li')
             li.innerHTML = `<h3>${luthier.name}</h3>
-                                     <p>${luthier.species}</p>`
+                            <p>${luthier.species}</p>`
                 lista.append(li)                     
-              })
-    })
+            })
+            })
 }
+
